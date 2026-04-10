@@ -945,6 +945,41 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
   .options.grid-2 { grid-template-columns: 1fr; }
 }
 
+
+/* ── BOOKING MODAL ── */
+.booking-overlay {
+  position: fixed; inset: 0; z-index: 1001;
+  background: rgba(13,26,16,0.65); backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.booking-overlay.open { opacity: 1; pointer-events: all; }
+.booking-modal {
+  background: #ffffff; border-radius: 16px;
+  width: 100%; max-width: 680px; max-height: 92vh; overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(13,26,16,0.15);
+  transform: translateY(20px) scale(0.98); transition: transform 0.3s ease;
+}
+.booking-overlay.open .booking-modal { transform: translateY(0) scale(1); }
+.booking-modal-header {
+  padding: 22px 28px 18px; border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+  position: sticky; top: 0; background: #fff; z-index: 10;
+}
+.booking-modal-header h3 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.2rem; color: var(--text); font-weight: 400;
+}
+.booking-modal-header p {
+  font-size: 0.78rem; color: var(--text-dim); margin-top: 3px;
+}
+.booking-modal-body { padding: 0; }
+.booking-modal-body iframe { width: 100%; height: 600px; border: none; display: block; }
+@media (max-width: 600px) {
+  .booking-modal { border-radius: 16px 16px 0 0; }
+  .booking-overlay { align-items: flex-end; padding: 0; }
+  .booking-modal-body iframe { height: 520px; }
+}
 </style>
 
 
@@ -991,7 +1026,7 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
         <a href="#" onclick="openModal();return false;" class="cta-primary">Investment-Machbarkeitscheck starten →</a>
         
       </div>
-      <a href="#cta" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
+      <a href="#" onclick="openBookingModal();return false;" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
     </div>
   </div>
 
@@ -1026,7 +1061,7 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
           <a href="#" onclick="openModal();return false;" class="cta-primary">Investment-Machbarkeitscheck starten →</a>
           
         </div>
-        <a href="#cta" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
+        <a href="#" onclick="openBookingModal();return false;" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
       </div>
     </div>
   </div>
@@ -1082,7 +1117,7 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
         <a href="#" onclick="openModal();return false;" class="cta-primary">Investment-Machbarkeitscheck starten →</a>
         
       </div>
-      <a href="#cta" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
+      <a href="#" onclick="openBookingModal();return false;" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
     </div>
   </div>
 </div>
@@ -1140,7 +1175,7 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
         <a href="#" onclick="openModal();return false;" class="cta-primary">Investment-Machbarkeitscheck starten →</a>
         
       </div>
-      <a href="#cta" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
+      <a href="#" onclick="openBookingModal();return false;" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
     </div>
   </div>
 </div>
@@ -1192,7 +1227,7 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
         <a href="#" onclick="openModal();return false;" class="cta-primary">Investment-Machbarkeitscheck starten →</a>
         
       </div>
-      <a href="#cta" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
+      <a href="#" onclick="openBookingModal();return false;" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
     </div>
   </div>
 </div>
@@ -1249,7 +1284,7 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
         <a href="#" onclick="openModal();return false;" class="cta-primary">Investment-Machbarkeitscheck starten →</a>
         
       </div>
-      <a href="#cta" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
+      <a href="#" onclick="openBookingModal();return false;" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
     </div>
   </div>
 </div>
@@ -1292,7 +1327,7 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
           <a href="#" onclick="openModal();return false;" class="cta-primary">Investment-Machbarkeitscheck starten →</a>
           
         </div>
-        <a href="#cta" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
+        <a href="#" onclick="openBookingModal();return false;" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
       </div>
     </div>
   </div>
@@ -1319,7 +1354,7 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
         <a href="#" onclick="openModal();return false;" class="cta-primary">Investment-Machbarkeitscheck starten →</a>
         
       </div>
-      <a href="#cta" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
+      <a href="#" onclick="openBookingModal();return false;" class="cta-secondary">Kostenloses Erstgespräch buchen</a>
     </div>
   </div>
 </section>
@@ -1341,7 +1376,7 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
         <a href="#" onclick="openModal();return false;" class="cta-primary" style="width:100%;justify-content:center;">Investment-Machbarkeitscheck starten →</a>
         
       </div>
-      <a href="#" class="cta-secondary" style="width:100%;justify-content:center;margin-top:10px;">Kostenloses Erstgespräch buchen</a>
+      <a href="#" onclick="openBookingModal();return false;" class="cta-secondary" style="width:100%;justify-content:center;margin-top:10px;">Kostenloses Erstgespräch buchen</a>
       <p class="cta-fine">Beispielrechnungen · persönliche Ergebnisse im Gespräch</p>
     </div>
   </div>
@@ -1551,10 +1586,47 @@ function showCalStep() {
   // Lazy-load Cal iframe
   const iframe = document.getElementById('calIframe');
   if (!iframe.src || iframe.src === window.location.href) {
-    iframe.src = 'https://cal.com/susanne-schaffer-tlkj0o/30min?embed=true';
+    iframe.src = 'https://cal.com/susanne-schaffer-tlkj0o/studywg?embed=true';
   }
   document.getElementById('modal').scrollTop = 0;
 }
+
+// ── BOOKING MODAL ──
+function openBookingModal() {
+  const overlay = document.getElementById('bookingOverlay');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Lazy load iframe
+  const iframe = document.getElementById('bookingIframe');
+  if (!iframe.src || iframe.src === window.location.href) {
+    iframe.src = 'https://cal.com/susanne-schaffer-tlkj0o/studywg?embed=true';
+  }
+  // Send to Zapier as direct booking intent
+  sendBookingToZapier();
+}
+function closeBookingModal() {
+  document.getElementById('bookingOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleBookingOverlayClick(e) {
+  if (e.target === document.getElementById('bookingOverlay')) closeBookingModal();
+}
+function sendBookingToZapier() {
+  const payload = {
+    name: '',
+    quelle: 'studywg-invest.de',
+    aktion: 'Direktbuchung - Erstgespraech Button',
+    zeitstempel: new Date().toISOString(),
+    abgeschlossen: 'nein'
+  };
+  fetch('https://hooks.zapier.com/hooks/catch/24729049/u7wvyeg/', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {});
+}
+
 </script>
 
 
@@ -1799,5 +1871,21 @@ function showCalStep() {
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- ══════════ BOOKING MODAL ══════════ -->
+<div class="booking-overlay" id="bookingOverlay" onclick="handleBookingOverlayClick(event)">
+  <div class="booking-modal">
+    <div class="booking-modal-header">
+      <div>
+        <h3>Kostenloses Erstgespr&#xE4;ch buchen</h3>
+        <p>Unverbindlich &middot; Pers&#xF6;nlich &middot; Ohne Verkaufsdruck</p>
+      </div>
+      <button class="modal-close" onclick="closeBookingModal()">&#x2715;</button>
+    </div>
+    <div class="booking-modal-body">
+      <iframe id="bookingIframe" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
   </div>
 </div>
