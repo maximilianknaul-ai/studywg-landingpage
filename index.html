@@ -279,6 +279,9 @@ nav.scrolled {
   display: inline-block; vertical-align: middle;
 }
 .hero-h1 em { font-style: italic; color: var(--green-br); }
+.hero-sub-line { font-size: 0.62em; display: inline; white-space: nowrap; }
+.mobile-br { display: none; }
+@media (max-width: 500px) { .mobile-br { display: block; } }
 .hero-sub {
   font-size: 1rem; color: var(--text-mid);
   max-width: 520px; line-height: 1.7; font-weight: 300; margin-bottom: 44px;
@@ -665,134 +668,185 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
 
 
 /* ════════════════════════════════════════
-   MOBILE OPTIMIERT – ersetzt und ergänzt
-   alle bestehenden Breakpoints
+   MOBILE – komplett überarbeitet
 ════════════════════════════════════════ */
-
-/* ── GRUNDLAGEN ── */
 @media (max-width: 768px) {
   :root {
-    --section-pad: clamp(52px, 8vw, 80px);
-    --px: 20px;
+    --section-pad: 52px;
+    --px: 18px;
   }
 
   /* NAV */
-  nav { padding: 0 20px; height: 54px; }
-  .nav-brand { font-size: 0.85rem; }
+  nav { padding: 0 18px; height: 54px; }
+  .nav-brand { font-size: 0.82rem; }
   .nav-cta { padding: 8px 14px; font-size: 0.76rem; }
 
   /* TICKER */
-  .ticker-bar { padding: 9px 20px; gap: 24px; }
-  .tick-key { font-size: 0.58rem; }
-  .tick-val { font-size: 0.58rem; }
+  .ticker-bar { padding: 8px 18px; gap: 20px; }
+  .tick-key { font-size: 0.56rem; }
+  .tick-val { font-size: 0.56rem; }
 
-  /* HERO */
-  .hero-main { padding: 48px 20px 32px; text-align: left; align-items: flex-start; }
-  .hero-kicker { font-size: 0.6rem; margin-bottom: 24px; }
-  .hero-kicker::before, .hero-kicker::after { width: 16px; }
-  .hero-h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); margin-bottom: 20px; }
-  .hero-h1 .badge {
-    font-size: 0.55em; padding: 3px 10px;
-    display: block; width: fit-content; margin: 6px 0;
+  /* HERO – linksbündig, sauber */
+  .hero-main {
+    padding: 40px 18px 28px;
+    text-align: left;
+    align-items: flex-start;
   }
-  .hero-sub { font-size: 0.92rem; margin-bottom: 32px; max-width: 100%; }
-  .dual-cta { flex-direction: column; align-items: stretch; width: 100%; }
+  .hero-kicker {
+    font-size: 0.58rem; margin-bottom: 20px;
+    flex-wrap: wrap; gap: 6px;
+  }
+  .hero-kicker::before, .hero-kicker::after { width: 14px; }
+  .hero-h1 {
+    font-size: 2.6rem;
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  /* Badge als eigene Zeile, passende Größe */
+  .hero-h1 .badge {
+    font-size: 0.48em;
+    padding: 4px 12px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 2px 4px;
+  }
+  .hero-sub {
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+    max-width: 100%;
+    line-height: 1.6;
+  }
+
+  /* DUAL CTAs – gestapelt, volle Breite */
+  .dual-cta { flex-direction: column; align-items: stretch; width: 100%; gap: 10px; }
   .dual-cta.center { align-items: stretch; }
-  .cta-primary { width: 100%; justify-content: center; padding: 16px 20px; font-size: 0.88rem; }
-  .cta-secondary { width: 100%; justify-content: center; padding: 16px 20px; font-size: 0.88rem; }
+  .cta-primary { width: 100%; justify-content: center; padding: 15px 18px; font-size: 0.88rem; }
+  .cta-secondary { width: 100%; justify-content: center; padding: 15px 18px; font-size: 0.88rem; }
 
-  /* HERO BOTTOM BAR */
+  /* HERO BOTTOM BAR – 2×2 + volle Breite CTA */
   .hero-bottom { grid-template-columns: 1fr 1fr; }
-  .hb-item { padding: 16px 18px; }
+  .hb-item { padding: 14px 16px; }
   .hb-item:nth-child(3) { border-right: none; }
-  .hb-label { font-size: 0.58rem; }
-  .hb-val { font-size: 1rem; }
-  .hb-cta { grid-column: span 2; border-left: none; border-top: 1px solid var(--border-g); justify-content: center; padding: 16px 20px; }
+  .hb-label { font-size: 0.56rem; letter-spacing: 0.08em; }
+  .hb-val { font-size: 0.92rem; }
+  .hb-cta {
+    grid-column: span 2; border-left: none;
+    border-top: 1px solid var(--border-g);
+    justify-content: center; padding: 14px 18px;
+  }
 
-  /* TAGS */
-  .tag { font-size: 0.62rem; }
+  .tag { font-size: 0.6rem; }
+  .section-cta { padding: 28px 0; }
 
   /* VSL */
-  .vsl-headline h2 { font-size: clamp(1.6rem, 6vw, 2.2rem); }
-  .vsl-headline p { font-size: 0.88rem; }
-  .vsl-below { margin-top: 24px; }
+  .vsl-headline h2 { font-size: 1.7rem; }
+  .vsl-headline p { font-size: 0.86rem; }
+  .vsl-below { margin-top: 20px; }
 
-  /* VERGLEICH */
-  .compare-headline h2 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
-  .compare-headline .hl-sub { font-size: 0.86rem; }
+  /* VERGLEICH – gestapelt */
+  .compare-headline h2 { font-size: 1.7rem; }
+  .compare-headline .hl-sub { font-size: 0.84rem; }
   .compare-wrap { flex-direction: column; gap: 8px; align-items: stretch; }
-  .compare-vs { transform: none; text-align: center; padding: 4px 0; font-size: 0.88rem; }
-  .card-bad, .card-good { width: 100%; padding: 22px 20px; border-radius: 10px; }
-  .card-title { font-size: 1.2rem; }
-  .card-row { font-size: 0.82rem; padding: 11px 0; gap: 10px; }
-  .card-row span:last-child { text-align: right; white-space: nowrap; }
-  .card-footer { font-size: 0.78rem; padding: 11px 14px; }
+  .compare-vs { text-align: center; padding: 6px 0; font-size: 0.9rem; }
 
-  /* SECTION CTA */
-  .section-cta { padding: 32px 0; }
+  /* Karten – Zeilen stacken auf sehr kleinen Screens */
+  .card-bad, .card-good { width: 100%; padding: 20px 18px; border-radius: 10px; }
+  .card-title { font-size: 1.15rem; }
+  .card-subtitle { font-size: 0.75rem; }
+
+  /* CRITICAL FIX: Karten-Zeilen – Key oben, Wert darunter */
+  .card-row {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 12px 0;
+  }
+  .card-row span:first-child {
+    font-size: 0.75rem;
+    opacity: 0.65;
+    white-space: normal;
+  }
+  .card-row span:last-child {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: left;
+    white-space: normal;
+  }
+  .card-footer { font-size: 0.78rem; padding: 12px 14px; }
 
   /* HEBEL */
-  .hebel-intro h2 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
-  .hebel-intro p { font-size: 0.9rem; }
+  .hebel-intro h2 { font-size: 1.7rem; }
+  .hebel-intro p { font-size: 0.88rem; }
   .hebel-grid { grid-template-columns: 1fr; gap: 3px; }
-  .hebel-card { padding: 28px 22px; }
-  .hebel-card h3 { font-size: 1.2rem; }
+  .hebel-card { padding: 26px 20px; }
+  .hebel-card h3 { font-size: 1.15rem; }
   .hebel-card p { font-size: 0.82rem; }
-  .hebel-result-row { flex-direction: column; padding: 24px 22px; gap: 16px; text-align: center; border-radius: 8px; }
-  .hrr-left h3 { font-size: 1.15rem; }
+  .hebel-result-row {
+    flex-direction: column; padding: 22px 20px;
+    gap: 12px; text-align: center;
+  }
+  .hrr-left h3 { font-size: 1.1rem; }
   .hrr-left p { font-size: 0.8rem; }
   .hrr-right { text-align: center; }
   .hrr-right .big { font-size: 2rem; }
 
+  /* RECHENBEISPIEL */
+  .rechnung-grid { grid-template-columns: 1fr; gap: 20px; }
+  .rechnung-left h2 { font-size: 1.7rem; }
+  .rechnung-left p { font-size: 0.86rem; }
+  /* Tabellen-Zeilen: Label oben, Wert unten */
+  .rt-row {
+    flex-direction: column; gap: 2px;
+    padding: 11px 16px;
+  }
+  .rt-row .rk { font-size: 0.72rem; opacity: 0.65; }
+  .rt-row .rv { font-size: 0.95rem; }
+  .rt-footer .big { font-size: 1.5rem; }
+  .steuer-row { flex-wrap: wrap; gap: 6px; }
+  .steuer-row .sr-label { flex: 0 0 100%; font-size: 0.75rem; }
+  .steuer-bar-wrap { flex: 1; }
+  .steuer-row .sr-val { flex: 0 0 auto; }
+  .steuer-box { padding: 16px; }
+  .steuer-box h4 { font-size: 1rem; }
+
   /* LEIPZIG */
-  .leipzig-grid { grid-template-columns: 1fr; gap: 36px; }
-  .leipzig-left h2 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
-  .leipzig-left p { font-size: 0.9rem; }
-  .leipzig-stats { grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 24px; }
-  .ls-item { padding: 16px 18px; }
-  .ls-item .ln { font-size: 1.5rem; }
-  .ls-item .ll { font-size: 0.72rem; }
-  .l-point { padding: 16px 18px; }
-  .l-point h4 { font-size: 0.88rem; }
+  .leipzig-grid { grid-template-columns: 1fr; gap: 32px; }
+  .leipzig-left h2 { font-size: 1.7rem; }
+  .leipzig-left p { font-size: 0.88rem; }
+  .leipzig-stats { grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 20px; }
+  .ls-item { padding: 14px 16px; }
+  .ls-item .ln { font-size: 1.4rem; }
+  .ls-item .ll { font-size: 0.7rem; }
+  .l-point { padding: 14px 16px; }
+  .l-point h4 { font-size: 0.86rem; }
   .l-point p { font-size: 0.78rem; }
 
-  /* ABLAUF */
-  .ablauf-intro h2 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
-  .ablauf-intro p { font-size: 0.9rem; }
+  /* ABLAUF – Nummern links, Text rechts */
+  .ablauf-intro h2 { font-size: 1.7rem; }
+  .ablauf-intro p { font-size: 0.88rem; }
   .steps { grid-template-columns: 1fr; gap: 0; }
   .steps::before { display: none; }
   .step {
-    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 0;
     border-bottom: 1px solid var(--border);
-    display: grid;
-    grid-template-columns: 44px 1fr;
-    column-gap: 16px;
     text-align: left;
-    align-items: start;
   }
   .step:last-child { border-bottom: none; }
-  .step-num { margin: 0; width: 36px; height: 36px; font-size: 0.7rem; }
-  .step h4 { font-size: 0.95rem; margin-bottom: 6px; }
-  .step p { font-size: 0.8rem; }
-  .step-time { margin-top: 6px; font-size: 0.65rem; }
-
-  /* RECHENBEISPIEL */
-  .rechnung-grid { grid-template-columns: 1fr; gap: 24px; }
-  .rechnung-left h2 { font-size: clamp(1.7rem, 6vw, 2.4rem); }
-  .rechnung-left p { font-size: 0.88rem; }
-  .rt-row { font-size: 0.82rem; padding: 11px 16px; flex-wrap: wrap; gap: 3px; }
-  .rt-row .rk { flex: 0 0 100%; font-size: 0.75rem; opacity: 0.7; }
-  .rt-row .rv { font-size: 0.9rem; }
-  .rt-footer .big { font-size: 1.5rem; }
-  .steuer-row { flex-wrap: wrap; gap: 6px; }
-  .steuer-row .sr-label { flex: 0 0 100%; font-size: 0.76rem; }
-  .steuer-bar-wrap { flex: 1; }
-  .steuer-row .sr-val { flex: 0 0 auto; }
-  .steuer-box { padding: 18px; }
-  .steuer-box h4 { font-size: 1rem; }
+  .step-num {
+    width: 36px; height: 36px; flex-shrink: 0;
+    margin: 0; font-size: 0.68rem;
+  }
+  .step-content { flex: 1; }
+  .step h4 { font-size: 0.92rem; margin-bottom: 5px; }
+  .step p { font-size: 0.8rem; line-height: 1.5; }
+  .step-time { margin-top: 5px; font-size: 0.64rem; }
 
   /* TESTIMONIAL */
-  .testi-quote { font-size: clamp(1.2rem, 5vw, 1.6rem); padding-left: 16px; }
+  .testi-quote { font-size: 1.2rem; padding-left: 0; }
   .testi-quote::before { font-size: 3.5rem; top: -16px; left: -8px; }
   .testi-attr { justify-content: flex-start; gap: 10px; }
   .testi-mini-grid { grid-template-columns: 1fr; gap: 3px; }
@@ -1056,9 +1110,8 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
     <div class="hero-kicker">Study-WG-Konzept · Leipzig · Kulturdenkmal Invest</div>
     <h1 class="hero-h1 reveal">
       Ein Konzept,<br>
-      <span style="font-size:0.6em;">bei dem</span>
-      <span class="badge">MIETER&nbsp;+&nbsp;STAAT</span><br>
-      <em>dein Investment komplett finanzieren.</em>
+      <span class="hero-sub-line">bei dem <span class="badge">MIETER&nbsp;+&nbsp;STAAT</span></span><br>
+      <em>dein Investment<br class="mobile-br"> komplett finanzieren.</em>
     </h1>
     <p class="hero-sub reveal reveal-delay-1">
       Ein professionell gemanagtes Immobilien-Investment in Leipzig –
@@ -1142,10 +1195,10 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
         <div class="card-title" style="color:#fff;">Mieter + Staat bauen für dich.</div>
         <div class="card-subtitle" style="color:rgba(255,255,255,0.4);">Bank finanziert · du bringst geringes Eigenkapital.</div>
         <div class="card-row"><span class="card-key-light">Wer finanziert dein Studi-WG-Konzept?</span><span style="color:rgba(180,240,190,0.9);font-weight:500;">Mieter + staatliche Förderungen</span></div>
-        <div class="card-row"><span class="card-key-light">Steuerliche Entlastung</span><span style="color:rgba(180,240,190,0.9);font-weight:500;">Steuerlast wird in privates Vermögen umgewandelt</span></div>
+        <div class="card-row"><span class="card-key-light">Steuerliche Entlastung</span><span style="color:rgba(180,240,190,0.9);font-weight:500;">Steuerlast → privates Vermögen</span></div>
         <div class="card-row"><span class="card-key-light">Monatlicher Eigenaufwand</span><span style="color:rgba(180,240,190,0.9);font-weight:500;">Neutral – bzw. monatlicher Vermögenszuwachs</span></div>
         <div class="card-row"><span class="card-key-light">Verwaltungsaufwand</span><span style="color:rgba(180,240,190,0.9);font-weight:500;">Komplett gemanagt</span></div>
-        <div class="card-row"><span class="card-key-light">In 10 Jahren</span><span style="color:rgba(180,240,190,0.9);font-weight:500;">Wertentwicklung Leipziger Immobilienmarkt – Nr. 1 in Deutschland, komplett steuerfreier Gewinn</span></div>
+        <div class="card-row"><span class="card-key-light">In 10 Jahren</span><span style="color:rgba(180,240,190,0.9);font-weight:500;">Wertentwicklung Leipzig – Nr. 1 in DE, steuerfreier Gewinn</span></div>
         <div class="card-footer" style="background:rgba(255,255,255,0.08);color:rgba(180,240,190,0.8);">Ohne eigenen Aufwand wird dein Vermögen aufgebaut.</div>
       </div>
     </div>
@@ -1312,10 +1365,10 @@ footer .f-disc { font-size: 0.68rem; color: var(--text-faint); width: 100%; text
       <p>Von der ersten Anfrage bis zum laufenden Investment – begleitet, strukturiert, ohne Überraschungen.</p>
     </div>
     <div class="steps">
-      <div class="step reveal"><div class="step-num">01</div><h4>Machbarkeitscheck</h4><p>Kurze Ersteinschätzung, ob und wie das Konzept zu deiner persönlichen Situation passt.</p><div class="step-time">~ 2 Minuten</div></div>
-      <div class="step reveal reveal-delay-1"><div class="step-num">02</div><h4>Analysegespräch</h4><p>Du erfährst mit konkreten Zahlen, wie sich dieses Investment für dein Profil rechnet – mit ehrlicher Einschätzung, ohne Verkaufsdruck.</p><div class="step-time">~ 45 Minuten</div></div>
-      <div class="step reveal reveal-delay-2"><div class="step-num">03</div><h4>Objektauswahl & Finanzierung</h4><p>Wir schlagen ein passendes Objekt vor und begleiten den Finanzierungsprozess inklusive Beantragung aller Fördermöglichkeiten.</p><div class="step-time">Begleitet</div></div>
-      <div class="step reveal reveal-delay-3"><div class="step-num">04</div><h4>Übergabe & Betrieb</h4><p>Nach Renovierung übernimmt eine Spezialagentur alles. Du bekommst regelmäßige Berichte. Das war's.</p><div class="step-time">Vollverwaltet</div></div>
+      <div class="step reveal"><div class="step-num">01</div><div class="step-content"><h4>Machbarkeitscheck</h4><p>Kurze Ersteinschätzung, ob und wie das Konzept zu deiner persönlichen Situation passt.</p><div class="step-time">~ 2 Minuten</div></div></div>
+      <div class="step reveal reveal-delay-1"><div class="step-num">02</div><div class="step-content"><h4>Analysegespräch</h4><p>Du erfährst mit konkreten Zahlen, wie sich dieses Investment für dein Profil rechnet – mit ehrlicher Einschätzung, ohne Verkaufsdruck.</p><div class="step-time">~ 45 Minuten</div></div></div>
+      <div class="step reveal reveal-delay-2"><div class="step-num">03</div><div class="step-content"><h4>Objektauswahl & Finanzierung</h4><p>Wir schlagen ein passendes Objekt vor und begleiten den Finanzierungsprozess inklusive Beantragung aller Fördermöglichkeiten.</p><div class="step-time">Begleitet</div></div></div>
+      <div class="step reveal reveal-delay-3"><div class="step-num">04</div><div class="step-content"><h4>Übergabe & Betrieb</h4><p>Nach Renovierung übernimmt eine Spezialagentur alles. Du bekommst regelmäßige Berichte. Das war's.</p><div class="step-time">Vollverwaltet</div></div></div>
     </div>
   </div>
 </section>
