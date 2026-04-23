@@ -1556,17 +1556,25 @@ function checkName() {
   const dsgvo = document.getElementById('dsgvoCheck').checked;
   document.getElementById('next0').disabled = !(name.length >= 2 && dsgvo);
 }
+let emailDebounceTimer = null;
+let emailAlreadySent = false;
 function checkEmail() {
   const email = document.getElementById('emailInput').value.trim();
   const emailValid = email.length > 4 && email.includes('@') && email.includes('.');
   answers['email'] = emailValid ? email : '';
-  // re-check if q1 answer already selected
   if (answers['q1']) {
     document.getElementById('next1').disabled = !emailValid;
   }
-  // Fire webhook as soon as email is valid - captures early abandoners
-  if (emailValid && answers['name']) {
-    sendToZapier(false);
+  // Debounce: wait 2 seconds after user stops typing before firing webhook
+  // And only fire ONCE per email (not on every keystroke)
+  if (emailDebounceTimer) clearTimeout(emailDebounceTimer);
+  if (emailValid && answers['name'] && !emailAlreadySent) {
+    emailDebounceTimer = setTimeout(() => {
+      if (answers['email'] && answers['email'].length > 4) {
+        sendToZapier(false);
+        emailAlreadySent = true;
+      }
+    }, 2000);
   }
 }
 
@@ -1717,7 +1725,7 @@ function showCalStep() {
   const isMobile = window.innerWidth < 768;
   if (isMobile) {
     // On mobile, open Cal.com in new tab - iframe scroll doesn't work on iOS
-    window.open('https://cal.com/susanne-schaffer-tlkj0o/studywg', '_blank');
+    window.open('https://cal.com/susanne-schaffer-tlkj0o/studi-wg-konzept', '_blank');
     return;
   }
   // Desktop: show embedded iframe step
@@ -1726,7 +1734,7 @@ function showCalStep() {
   calStep.classList.add('active');
   const iframe = document.getElementById('calIframe');
   if (!iframe.src || iframe.src === window.location.href) {
-    iframe.src = 'https://cal.com/susanne-schaffer-tlkj0o/studywg?embed=true';
+    iframe.src = 'https://cal.com/susanne-schaffer-tlkj0o/studi-wg-konzept?embed=true';
   }
   document.getElementById('modal').scrollTop = 0;
 }
@@ -1737,7 +1745,7 @@ function openBookingModal() {
   sendBookingToZapier();
   if (isMobile) {
     // On mobile, open Cal.com in new tab
-    window.open('https://cal.com/susanne-schaffer-tlkj0o/studywg', '_blank');
+    window.open('https://cal.com/susanne-schaffer-tlkj0o/studi-wg-konzept', '_blank');
     return;
   }
   const overlay = document.getElementById('bookingOverlay');
@@ -1745,7 +1753,7 @@ function openBookingModal() {
   document.body.style.overflow = 'hidden';
   const iframe = document.getElementById('bookingIframe');
   if (!iframe.src || iframe.src === window.location.href) {
-    iframe.src = 'https://cal.com/susanne-schaffer-tlkj0o/studywg?embed=true';
+    iframe.src = 'https://cal.com/susanne-schaffer-tlkj0o/studi-wg-konzept?embed=true';
   }
 }
 function closeBookingModal() {
