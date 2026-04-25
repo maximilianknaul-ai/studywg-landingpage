@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '2170504250433952');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=2170504250433952&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Studi-WG-Konzept Leipzig · Kulturdenkmal Invest</title>
@@ -1527,6 +1545,7 @@ function openModal() {
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   updateProgress(0);
+  if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout', { content_name: 'Investment-Machbarkeitscheck' });
 }
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('open');
@@ -1578,10 +1597,15 @@ function checkEmail() {
   }
 }
 
+let viewContentFired = false;
 function selectOption(el, qId, value) {
   el.closest('.options').querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
   answers[qId] = value;
+  if (!viewContentFired && typeof fbq !== 'undefined') {
+    fbq('track', 'ViewContent', { content_name: 'Quiz First Answer', question: qId });
+    viewContentFired = true;
+  }
   const qNum = qId.replace('q', '');
   const nextBtn = document.getElementById('next' + qNum);
   if (nextBtn) {
@@ -1692,6 +1716,7 @@ function showResult() {
 
   answers['result'] = resultType;
   sendToZapier(true);
+  if (typeof fbq !== 'undefined') fbq('track', 'Lead', { content_name: 'Quiz Completed', result_type: resultType });
 
   // Summary tags
   const labelMap = {
@@ -1722,9 +1747,9 @@ function showResult() {
 }
 
 function showCalStep() {
+  if (typeof fbq !== 'undefined') fbq('track', 'Schedule', { content_name: 'Cal.com Termin Click', source: 'Quiz Result' });
   const isMobile = window.innerWidth < 768;
   if (isMobile) {
-    // On mobile, open Cal.com in new tab - iframe scroll doesn't work on iOS
     window.open('https://cal.com/susanne-schaffer-tlkj0o/studi-wg-konzept', '_blank');
     return;
   }
@@ -1739,8 +1764,24 @@ function showCalStep() {
   document.getElementById('modal').scrollTop = 0;
 }
 
+
+// ── CAL.COM IFRAME EVENT LISTENER ──
+// Tracks successful bookings made through embedded Cal.com iframe
+window.addEventListener('message', function(e) {
+  // Cal.com postMessage events
+  if (e.data && (e.data.type || e.data.name)) {
+    const eventType = e.data.type || e.data.name || '';
+    if (eventType === 'eventTypeSelected' || eventType === 'bookingSuccessful' || eventType === '__bookingSuccessful' || eventType.includes('booking')) {
+      if (typeof fbq !== 'undefined' && eventType.toLowerCase().includes('successful')) {
+        fbq('track', 'CompleteRegistration', { content_name: 'Termin gebucht (iframe)', source: 'Cal.com Embed' });
+      }
+    }
+  }
+});
+
 // ── BOOKING MODAL ──
 function openBookingModal() {
+  if (typeof fbq !== 'undefined') fbq('track', 'Schedule', { content_name: 'Cal.com Termin Click', source: 'Direct Button' });
   const isMobile = window.innerWidth < 768;
   sendBookingToZapier();
   if (isMobile) {
